@@ -8,6 +8,8 @@ Users can send completed PDFs from the Library to Merge PDFs. Sent PDFs appear i
 
 Completed PDFs appear in a local library. Users can preview, rename, delete, and send a completed PDF to Merge PDFs. Imported images and PDFs stay unchanged; temporary inputs do not become library items. The library and Recent merge list remain available after the app restarts.
 
+Users can switch the app interface between English and Burmese at any time. The choice is saved on the device and remains selected after restarting the app. Switching languages does not alter PDFs, imported files, or names the user has entered.
+
 Core creation, merging, and browsing work without a network connection. The first release does not include accounts, cloud sync, searchable text, or editing a PDF after saving it.
 
 ## Acceptance criteria
@@ -17,3 +19,4 @@ Core creation, merging, and browsing work without a network connection. The firs
 - A canceled camera capture or picker leaves the current work and library intact.
 - Unreadable or protected PDF inputs, unusable images, and insufficient device storage show a clear error without adding an incomplete PDF to the library.
 - Completed PDFs remain available after restarting the app, and can be previewed, renamed, and deleted. Recent merge entries survive restart and reflect library renames and deletions.
+- A user can switch between English and Burmese on every screen; buttons, instructions, dialogs, progress messages, and common errors use the selected language. The choice persists after restart.
