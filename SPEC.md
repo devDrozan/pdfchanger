@@ -10,6 +10,8 @@ Completed PDFs appear in a local library. Users can preview, rename, delete, and
 
 Users can switch the app interface between English and Burmese at any time. The choice is saved on the device and remains selected after restarting the app. Switching languages does not alter PDFs, imported files, or names the user has entered.
 
+On launch, the app shows its logo for at least three seconds while it prepares the library and saved language choice. It then fades smoothly into the main screen without showing an empty screen. The language selector is clearly labeled, aligned above the main navigation, and available from the main screen.
+
 Core creation, merging, and browsing work without a network connection. The first release does not include accounts, cloud sync, searchable text, or editing a PDF after saving it.
 
 ## Acceptance criteria
@@ -20,3 +22,4 @@ Core creation, merging, and browsing work without a network connection. The firs
 - Unreadable or protected PDF inputs, unusable images, and insufficient device storage show a clear error without adding an incomplete PDF to the library.
 - Completed PDFs remain available after restarting the app, and can be previewed, renamed, and deleted. Recent merge entries survive restart and reflect library renames and deletions.
 - A user can switch between English and Burmese on every screen; buttons, instructions, dialogs, progress messages, and common errors use the selected language. The choice persists after restart.
+- On a fresh launch, the logo remains visible for at least three seconds and until the main screen is ready, then fades into the app. The language selector is easy to find and use in either language.
