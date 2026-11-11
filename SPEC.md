@@ -8,7 +8,7 @@ Users can send completed PDFs from the Library to Merge PDFs. Sent PDFs appear i
 
 After the user taps Save merged PDF, a processing popup with an animation appears immediately. It stays visible for about ten seconds on success, or longer if the merge needs more time. The popup closes promptly if merging fails, followed by a clear error. The merged PDF appears in the library only when saving succeeds.
 
-The merge loading screen may show an adaptive test ad in a separate area below the progress message when ad consent permits requests. The ad does not cover the progress message, block merging, or keep the loading screen open if the PDF is ready. The merge works the same when no ad is available.
+The merge loading screen may show an adaptive banner ad in a separate area below the progress message when ad consent permits requests. The ad does not cover the progress message, block merging, or keep the loading screen open if the PDF is ready. The merge works the same when no ad is available.
 
 Completed PDFs appear in a local library. Users can preview, rename, delete, and send a completed PDF to Merge PDFs. Imported images and PDFs stay unchanged; temporary inputs do not become library items. The library and Recent merge list remain available after the app restarts.
 
@@ -26,7 +26,7 @@ Core creation, merging, and browsing work without a network connection. The firs
 - A user can photograph or import multiple pages, arrange and edit them, then save a readable A4 PDF.
 - A user can send a library PDF to Merge PDFs without removing the original, select PDFs from Recent or Files, reorder two or more selected PDFs, and save a merged file with all pages in that order.
 - Saving a merged PDF shows a localized animated processing popup for about ten seconds on success. A slow merge keeps the popup visible until completion; an error dismisses it promptly and leaves no incomplete library entry.
-- The merge loading screen requests only a test ad when consent allows it. Missing or failed ads do not change merge output or timing.
+- The merge loading screen requests an ad only when consent allows it. Development builds use a test ad; release builds use the configured production ad unit. Missing or failed ads do not change merge output or timing.
 - A canceled camera capture or picker leaves the current work and library intact.
 - Unreadable or protected PDF inputs, unusable images, and insufficient device storage show a clear error without adding an incomplete PDF to the library.
 - Completed PDFs remain available after restarting the app, and can be previewed, renamed, and deleted. Recent merge entries survive restart and reflect library renames and deletions.

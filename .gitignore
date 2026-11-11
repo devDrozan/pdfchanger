@@ -5,4 +5,5 @@ dist/
 coverage/
 mobile/ios/
 mobile/android/
+android-backup-before-admob/
 *.log

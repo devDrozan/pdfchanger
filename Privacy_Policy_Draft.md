@@ -1,5 +1,7 @@
 # PDF Changer — Privacy Audit and Privacy Policy Draft
 
+> Updated 8 November 2026: The AdMob addendum and user-facing policy below reflect the newly added ads SDK. The 5 November audit is historical; its absence-of-ads and provisional zero-collection conclusions are superseded. Production SDK behavior, consent configuration, and store declarations still require release verification.
+
 Review date: **5 November 2026 (Asia/Seoul)**
 App: **PDF Changer 0.1.0**, Android package `com.pdfchanger.mobile`
 Source baseline: `ef5c1ffc31b14054efc9c96650929b9804097de3`; working tree was clean before this audit.
@@ -96,48 +98,86 @@ Before publication: supply developer identity, privacy contact, effective date, 
 - [ ] Test camera denial/revocation, Android picker paths on supported versions, and external viewer/share behavior.
 - [ ] Review and submit accurate Data safety declarations for the actual distributed app and relevant active versions. Record the build/version used for verification.
 
-## User-facing privacy policy draft
+## AdMob update — 8 November 2026
 
-**Editorial status: not ready to publish.** Replace the bracketed identity/contact/date fields. Resolve release SDK behavior and backup controls first. The wording below describes the observed local-processing implementation and current backup uncertainty; revise it if those behaviors change. Publish only this user-facing section after verification, not the internal audit/checklist.
+This focused source review supersedes the historical findings above where advertising changes data handling. Existing working-tree edits were preserved; no app code was changed for this policy update.
+
+- **File permission:** Network/advertising permissions must be checked in the final manifest. The older debug manifest's absence of advertising ID permission is no longer current evidence. No new document-access purpose is introduced by ads.
+- **Data collection:** `mobile/package.json` and the lockfile now include `react-native-google-mobile-ads` 17.4.0. Do not submit the former provisional “no data collected/shared” answers for an ads-enabled release. Review approximate location, app interactions, diagnostics/performance, and device/other identifiers against the shipped settings. Sources: [Google SDK disclosure](https://developers.google.com/admob/android/privacy/play-data-disclosure), [Play Data safety guidance](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en).
+- **Server upload:** Document processing remains local in inspected source; ad requests introduce off-device advertising traffic. Development banners use Google test unit IDs and release banners use the configured production unit. Neither banner receives document contents or filenames (`mobile/src/components/TestBannerAd.tsx`, `mobile/src/components/MergeTestBannerAd.tsx`). Test ads do not establish an exemption from SDK disclosures.
+- **Third-party SDKs:** Installed wrapper metadata lists Android Google Mobile Ads 25.5.0 / UMP 4.0.0 and iOS Google Mobile Ads 13.10.0 / UMP 3.1.0. These are dependency defaults, not proof of the built release versions. No mediation adapters were identified in the direct package list. Re-review if more ad networks are added. [iOS SDK disclosure](https://developers.google.com/admob/ios/privacy/data-disclosure) currently describes a later SDK version; verify version-specific behavior before iOS release.
+- **Data Storage:** Local PDF/cache retention and backup caveats remain applicable. Advertising/consent storage is additional. Google-managed data retention and deletion are separate from deleting a local PDF; do not promise a developer-controlled fixed SDK retention period.
+- **Privacy Policy:** The public policy now identifies AdMob, ad-related processing, purposes, recipients, controls, and third-party retention. Effective date: 8 November 2026. Developer/contact: Robindev / rozannainghangu@gmail.com. Public URL: https://devdrozan.github.io/pdfchanger/.
+
+### Consent and release checks still required
+
+`mobile/App.tsx` uses `AdsConsent.gatherConsent()` and checks `canRequestAds` before initialization; `mobile/app.json` sets `delayAppMeasurementInit: true`. These do not prove that the required messages are configured or that every region's choices work. Settings provides Privacy Choices when UMP reports that the entry point is required. Verify the configured consent messages and entry point in the release app. See [Google UMP guidance](https://developers.google.com/admob/android/privacy).
+
+The Library and Merge banners use Google test units in development and the configured production banner unit in release. No explicit non-personalized-only request option was found, so the policy does not promise exclusively non-personalized ads. Verify regional consent/rejection, advertising ID handling, applicable iOS tracking authorization, audience/child-directed settings, AdMob Privacy & messaging setup, and actual release traffic before distribution. Update Play Console's Data safety, advertising ID, and “Contains ads” declarations to match the released app. In-app privacy-policy access and Android backup restrictions are implemented; verify them against the release artifact. This text update does not certify compliance or submit store forms.
+
+## User-facing privacy policy
 
 ### Privacy Policy for PDF Changer
 
-Effective date: **[INSERT EFFECTIVE DATE]**
-Developer: **[INSERT DEVELOPER OR LEGAL ENTITY NAME]**
-Privacy contact: **[INSERT WORKING PRIVACY EMAIL OR CONTACT URL]**
+Effective date: **8 November 2026**
 
-PDF Changer helps you photograph pages, turn images into PDFs, merge PDFs, and manage saved PDFs. Its document creation and merging features process files on your device and work offline. You do not need a PDF Changer account.
+Developer: **Robindev**
 
-### Information the app accesses and uses
+Privacy contact: **rozannainghangu@gmail.com**
+
+Public URL: https://devdrozan.github.io/pdfchanger/
+
+PDF Changer creates and merges PDFs on your device. The app also uses Google AdMob for advertising, which involves network communication and advertising-related data. You do not need a PDF Changer account to use the app.
+
+### 1. Information the app accesses and uses
+
+PDF Changer, developed by Robindev, helps you photograph pages, turn images into PDFs, merge PDFs, and manage saved PDFs. Its document creation and merging features process files on your device and work offline.
 
 When you choose a feature, the app accesses the photos, images, PDFs, or camera captures you select. It uses their contents and file information, such as names, sizes, image dimensions, and page counts, to display, arrange, edit, create, merge, and manage documents. Your documents may contain personal or sensitive information depending on what you select.
 
 The app saves completed PDFs, a Recent list of saved PDF names, and your language preference in its local app storage. Original imported files are not changed by PDF creation or merging.
 
-### Permissions and your choices
+### 2. Permissions and your choices
 
 Camera permission is requested when you choose to photograph a page. You can decline it and use file or photo import instead. System pickers let you select images and documents. You can manage app permissions in your device settings.
 
-### Uploads, external services, and sharing
+### 3. Google AdMob advertising
 
-PDF Changer's document-processing features do not upload your documents to a developer-operated server or provide a PDF Changer cloud-sync service.
+PDF Changer uses Google's AdMob service through the Google Mobile Ads SDK to display ads. Ad requests require an internet connection. The app does not provide your document contents, selected images, or PDF filenames to the advertising SDK.
 
-On Android, preview can open a PDF in an external viewer. If preview is unavailable, the app can offer your device's share sheet. If you open or send a PDF through another app, that app receives access to the file and handles it under its own terms and privacy policy. File/photo providers selected through system pickers may also offer cloud-backed content.
+The SDK collects and shares advertising-related data with Google, including IP addresses (which can indicate approximate location), ad and app interactions, diagnostic and performance information, and device or account identifiers where available, such as Android advertising ID and app set ID. These are used for advertising, measurement and analytics, and fraud prevention. Google states that SDK data is encrypted in transit. Actual handling depends on platform, consent, settings, and SDK configuration. See [Google's SDK disclosure](https://developers.google.com/admob/android/privacy/play-data-disclosure) and [Google's Privacy Policy](https://policies.google.com/privacy).
+
+Ads may be personalized or non-personalized depending on your choices and applicable settings. Non-personalized ads can still involve data processing. Google may process information through its service providers and advertising partners as described in [how Google uses information from partner apps](https://policies.google.com/technologies/partner-sites).
+
+The app uses Google's consent service to check whether ads can be requested and to display consent messages when required by the configured service. Review the choices in any consent message you receive. You can also use your device's privacy settings to manage advertising identifiers and, on supported Apple devices, tracking permissions. Available controls vary by device and region; limiting an advertising identifier does not stop all advertising-related processing. For details, see [Google's advertising controls](https://policies.google.com/technologies/ads).
+
+### 4. Uploads, external services, and sharing
+
+PDF Changer's document-processing features do not upload your documents to a developer-operated server or provide a PDF Changer cloud-sync service. Advertising-related data is transmitted to Google as described above; offline document processing does not mean the entire app operates without network communication.
+
+On Android, preview can open a PDF in an external viewer. If preview is unavailable, the app can offer your device's share sheet. If you open or send a PDF through another app, that app receives access to the file and handles it under its own terms and privacy policy. File and photo providers selected through system pickers may also offer cloud-backed content.
 
 Operating-system backup or device-transfer features may copy or restore saved app data depending on your device and settings. PDF Changer does not operate those services. Copies held by external apps, selected providers, or backup services are outside the app's local library controls.
 
-### Storage, retention, and deletion
+### 5. Storage, retention, and deletion
 
 Completed PDFs stay in the app library until you delete them or the app's local data is removed. Deleting a PDF removes that saved app copy and its Recent entry. It does not delete original imported files or copies held elsewhere.
 
-Working copies of imported files and edited images can remain in the app's cache after an operation. Cache removal timing depends on the app and operating system; immediate deletion is not guaranteed in the reviewed version. The app also keeps your language preference and Recent metadata locally. Device controls for clearing app data or uninstalling can remove local app data; external copies and backups are managed separately and may later be restored.
+Working copies of imported files and edited images can remain in the app's cache after an operation. Cache removal timing depends on the app and operating system; immediate deletion is not guaranteed. The app also keeps your language preference and Recent metadata locally.
 
-### Security
+Device controls for clearing app data or uninstalling can remove local app data. External copies and backups are managed separately and may later be restored.
 
-The app uses platform app storage and system file-selection mechanisms. Opening or sharing a PDF grants access to external software. The reviewed version does not provide app-level PDF encryption or guaranteed secure erasure. Protect your device and consider the information in a document before opening it with another app or sharing it.
+Advertising data is retained by Google under its own policies and retention schedules. Deleting a PDF or uninstalling PDF Changer does not by itself delete data already received by Google. See [Google's retention policy](https://policies.google.com/technologies/retention) for its retention and deletion practices. For privacy requests concerning PDF Changer, contact Robindev using the address below.
 
-### Changes and contact
+### 6. Security
 
-We may update this policy as the app's data handling changes. The effective date above identifies the current policy. For privacy questions, contact **[INSERT THE SAME PRIVACY CONTACT]**.
+The app uses platform app storage and system file-selection mechanisms. Opening or sharing a PDF grants access to external software. PDF Changer does not provide app-level PDF encryption or guaranteed secure erasure. Protect your device and consider the information in a document before opening it with another app or sharing it.
 
-**Publication gate — remove after resolution:** Verify all production SDK collection/sharing and add any required recipient, data-type, purpose, retention, security, or user-control disclosures. The absence of advertising/analytics code in the app is not sufficient to publish an unconditional zero-collection claim. Confirm that the backup and temporary-file paragraphs still match the shipped version.
+### 7. Changes and contact
+
+We may update this policy as the app's data handling changes. The effective date above identifies the current policy.
+
+Robindev
+For privacy questions, email [rozannainghangu@gmail.com](mailto:rozannainghangu@gmail.com).
+
+If you email us, we receive the information you include and use it to respond to your request. Please avoid sending sensitive documents with a privacy inquiry.
